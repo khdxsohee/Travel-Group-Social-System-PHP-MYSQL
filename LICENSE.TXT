@@ -1,0 +1,19 @@
+Copyright © khdxsohee 2025
+
+All Rights Reserved.
+
+This software and associated documentation files (the “Software”) are the exclusive property of the copyright holder. 
+
+You may not:
+- Use this Software without explicit written permission
+- Copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software
+- Reverse engineer or reuse any portion of the codebase
+
+The Software is provided "as is", without warranty of any kind.
+
+Unauthorized use of this Software is strictly prohibited and may result in legal action.
+
+For permissions, contact the author directly.
+
+Author: khdxsohee
+
