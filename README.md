@@ -1,4 +1,4 @@
-# Travel Group Social System With Chat - PHO & MYSQL
+# Travel Group Social System With Chat - PHP & MYSQL
 
 A fully functional social networking web application built with **PHP** and **MySQL** that allows users to create accounts, login, and interact with others via **WhatsApp-like chat**, including **private and public group chats**.
 
