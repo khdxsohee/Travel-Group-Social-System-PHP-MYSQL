@@ -90,12 +90,13 @@ http://localhost/Travel-Group-Social-System-PHP-MYSQL/
 If you face any issues or want to contribute, feel free to contact me or open an issue in this repo.
 
 
-### 📃 License
-
+## 📃 License
 
 This project is proprietary and closed-source.  
-All rights reserved © khdxsohee 2025.  
+All rights reserved © khdxsohee 2025.   
+Unauthorized use is strictly prohibited.  
 You may not copy, modify, distribute, or use this project without explicit written permission from the author.
+See [LICENSE.txt](LICENSE.txt) for full details.
 
 
 ### 👨‍💻 Author
