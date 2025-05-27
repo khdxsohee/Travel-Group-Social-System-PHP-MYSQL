@@ -96,7 +96,7 @@ This project is proprietary and closed-source.
 All rights reserved © khdxsohee 2025.   
 Unauthorized use is strictly prohibited.  
 You may not copy, modify, distribute, or use this project without explicit written permission from the author.
-See [LICENSE.txt](LICENSE.txt) for full details.
+See [LICENSE.txt](https://github.com/khdxsohee/Travel-Group-Social-System-PHP-MYSQL/blob/main/LICENSE.TXT)) for full details.
 
 
 ### 👨‍💻 Author
