@@ -40,8 +40,8 @@ A fully functional social networking web application built with **PHP** and **My
 - Install it on your machine and start **Apache** and **MySQL** modules via the XAMPP Control Panel.
 
 ### Step 2: Place Project Files
-- Copy the entire project folder (`travel_group_social_system`) into the `htdocs` directory of your XAMPP installation.  
-  - Example path: `C:\xampp\htdocs\travel_group_social_system`
+- Copy the entire project folder (`Travel-Group-Social-System-PHP-MYSQL`) into the `htdocs` directory of your XAMPP installation.  
+  - Example path: `C:\xampp\htdocs\Travel-Group-Social-System-PHP-MYSQL`
 
 ### Step 3: Import Database
 - Open your browser and go to `http://localhost/phpmyadmin`  
@@ -64,7 +64,7 @@ A fully functional social networking web application built with **PHP** and **My
 ### Step 5: Run the Application
 In your browser, open:
 ```
-http://localhost/travel_group_social_system/
+http://localhost/Travel-Group-Social-System-PHP-MYSQL/
 ```
 - You should see the login/sign up page.
 
