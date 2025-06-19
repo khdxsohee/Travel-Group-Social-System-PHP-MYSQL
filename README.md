@@ -27,7 +27,7 @@ A fully functional social networking web application built with **PHP** and **My
 
 ## 💾 Database
 
-- Database name: `travel-group-social-system`  
+- Database name: `travel_group_social_system`  
 - The SQL dump file `travel_system.sql` is included in the project folder.  
 - It contains all tables and seed data required for the application to run.
 
