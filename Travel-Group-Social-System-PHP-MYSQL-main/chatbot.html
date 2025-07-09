@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Title</title>
+    <link rel="stylesheet" href="css/main.css">
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    /* Note: Aapki main website ki body styling yahan reh sakti hai. */
+    /* Agar yeh chatbot ki separate CSS file hai, to yahan se body styles hata dein. */
+    /* Agar aapki website ki body styling ko chatbot ki positioning affect kar rahi hai,
+       to 'position: relative;' ko main website ke container par apply karein. */
+    position: relative; /* For positioning the icon */
+    min-height: 100vh; /* Agar yeh main website ki body style hai */
+    margin: 0;         /* Agar yeh main website ki body style hai */
+    display: flex;     /* Agar yeh main website ki body style hai */
+    justify-content: center; /* Agar yeh main website ki body style hai */
+    align-items: center;     /* Agar yeh main website ki body style hai */
+}
+
+/* Chat Container */
+.cb-chat-container {
+    width: 350px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    max-height: 500px;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.cb-chat-container.cb-visible {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.cb-chat-container.cb-hidden {
+    display: none;
+}
+
+.cb-chat-header {
+    background-color: #DC3545; /* Primary Red */
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cb-chat-header h3 {
+    margin: 0;
+}
+
+.cb-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.cb-close-btn:hover {
+    color: #f8f9fa;
+}
+
+
+.cb-chat-box {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cb-message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    margin-bottom: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.cb-user-message {
+    align-self: flex-end;
+    background-color: #FEEAE6; /* Light Red for user messages */
+    color: #333;
+}
+
+.cb-bot-message {
+    align-self: flex-start;
+    background-color: #E0E0E0;
+    color: #333;
+}
+
+.cb-chat-input {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.cb-chat-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.cb-chat-input button {
+    background-color: #DC3545; /* Primary Red */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.cb-chat-input button:hover {
+    background-color: #C82333; /* Darker Red on hover */
+}
+
+/* Chatbot Toggle Icon Styles */
+.cb-chat-toggle-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #DC3545; /* Primary Red for icon */
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1001;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.cb-chat-toggle-icon:hover {
+    background-color: #C82333; /* Darker Red on hover */
+    transform: scale(1.05);
+}
+</style>
+    
+
+    <div class="cb-chat-container cb-hidden" id="cb-chat-container">
+        <div class="cb-chat-header">
+            <h3>Travel Bot</h3>
+            <button class="cb-close-btn" id="cb-close-chat-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cb-chat-box" id="cb-chat-box">
+            <div class="cb-message cb-bot-message">Hello! How can I help you with your travel plans today?</div>
+        </div>
+        <div class="cb-chat-input">
+            <input type="text" id="cb-user-input" placeholder="Type your message...">
+            <button id="cb-send-btn">Send</button>
+        </div>
+    </div>
+
+    <div class="cb-chat-toggle-icon" id="cb-chat-toggle-icon">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const chatContainer = document.getElementById('cb-chat-container');
+    const chatBox = document.getElementById('cb-chat-box');
+    const userInput = document.getElementById('cb-user-input');
+    const sendBtn = document.getElementById('cb-send-btn');
+    const chatToggleIcon = document.getElementById('cb-chat-toggle-icon');
+    const closeChatBtn = document.getElementById('cb-close-chat-btn');
+
+    // Simple predefined responses (same as before)
+    const responses = {
+        "hello": "Hi there! How can I help you plan your next adventure?",
+        "hi": "Hi there! How can I help you plan your next adventure?",
+        "how are you": "I'm just a bot, but I'm ready to assist you!",
+        "destinations": "We offer tours to amazing destinations like Paris, Tokyo, Rome, and New York. Which one interests you?",
+        "bookings": "To book a trip, please visit our 'Book Now' page or provide me with your desired destination and dates.",
+        "contact": "You can reach our customer support at support@travelwebsite.com or call us at 123-456-7890.",
+        "thanks": "You're welcome! Let me know if you need anything else.",
+        "thank you": "You're welcome! Let me know if you need anything else.",
+        "bye": "Goodbye! Have a great day and happy travels!",
+        "what is your name": "I am a travel chatbot designed to assist you with your queries.",
+        "packages": "We have various travel packages including adventure tours, romantic getaways, and family vacations. What kind of package are you looking for?",
+        "payment methods": "We accept major credit cards (Visa, MasterCard, Amex) and PayPal.",
+        "visa requirements": "Visa requirements vary by destination and your nationality. Please let me know your destination and origin country for specific information, or check our visa guide section on the website."
+    };
+
+    function addMessage(message, sender) {
+        const messageDiv = document.createElement('div');
+        // Classes ko bhi prefix karein
+        messageDiv.classList.add('cb-message', `cb-${sender}-message`); // user-message becomes cb-user-message, bot-message becomes cb-bot-message
+        messageDiv.textContent = message;
+        chatBox.appendChild(messageDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function getBotResponse(userMessage) {
+        const lowerCaseMessage = userMessage.toLowerCase();
+        for (const key in responses) {
+            if (lowerCaseMessage.includes(key)) {
+                return responses[key];
+            }
+        }
+        return "I'm sorry, I don't understand that. Could you please rephrase your question or ask about destinations, bookings, or contact information?";
+    }
+
+    function sendMessage() {
+        const userText = userInput.value.trim();
+        if (userText === '') return;
+
+        addMessage(userText, 'user');
+        userInput.value = '';
+
+        setTimeout(() => {
+            const botResponse = getBotResponse(userText);
+            addMessage(botResponse, 'bot');
+        }, 500);
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    userInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    // Chatbot Toggle Logic
+    chatToggleIcon.addEventListener('click', () => {
+        chatContainer.classList.remove('cb-hidden'); // cb-hidden use karein
+        chatContainer.classList.add('cb-visible');   // cb-visible use karein
+        chatToggleIcon.style.display = 'none';
+        userInput.focus();
+    });
+
+    closeChatBtn.addEventListener('click', () => {
+        chatContainer.classList.remove('cb-visible'); // cb-visible use karein
+        setTimeout(() => {
+            chatContainer.classList.add('cb-hidden'); // cb-hidden use karein
+            chatToggleIcon.style.display = 'flex';
+        }, 300);
+    });
+
+    // Auto Open Logic
+    const autoOpenDelay = 3000; // 3000 milliseconds = 3 seconds
+
+    setTimeout(() => {
+        if (chatContainer.classList.contains('cb-hidden')) { // cb-hidden check karein
+            chatContainer.classList.remove('cb-hidden');
+            chatContainer.classList.add('cb-visible');
+            chatToggleIcon.style.display = 'none';
+            userInput.focus();
+        }
+    }, autoOpenDelay);
+});
+</script>
+</body>
+</html>
